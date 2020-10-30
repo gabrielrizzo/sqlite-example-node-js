@@ -14,6 +14,15 @@ function instantiateDatabase (database) {
   }
 }
 
+/**
+ * @description Sqlite3 lib works with callbacks, so I prefered to transform it
+ * into promise based object, to improve core redeability. We need to bind
+ * database context because it probably use something internal on original
+ * database object.
+ * @function promisifyDatabase
+ * @param  {object<Database>} database sqlite3 database
+ * @return {object}
+ */
 function promisifyDatabase (database) {
   return {
     run: promisify(database.run.bind(database)),
