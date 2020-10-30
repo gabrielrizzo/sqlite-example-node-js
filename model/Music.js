@@ -1,5 +1,4 @@
-const instantiateDatabase = require('../database')
-const memoryDatabase = instantiateDatabase(':memory:')
+const memoryDatabase = require('../database')
 
 async function Music () {
   await memoryDatabase.run("CREATE TABLE IF NOT EXISTS musics (name TEXT, artist TEXT)")
@@ -11,7 +10,12 @@ async function Music () {
       })
     },
     getAll: async function () {
-      return memoryDatabase.get('SELECT * FROM musics')
+      return memoryDatabase.all('SELECT * FROM musics')
+    },
+    getFirstArtistMusic: async function (artist) {
+      return memoryDatabase.get('SELECT * FROM musics WHERE artist = $artist', {
+        $artist: artist
+      })
     }
   }
 }

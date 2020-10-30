@@ -17,8 +17,9 @@ function instantiateDatabase (database) {
 function promisifyDatabase (database) {
   return {
     run: promisify(database.run.bind(database)),
-    get: promisify(database.get.bind(database))
+    get: promisify(database.get.bind(database)),
+    all: promisify(database.all.bind(database))
   }
 }
 
-module.exports = instantiateDatabase
+module.exports = instantiateDatabase('./db')
