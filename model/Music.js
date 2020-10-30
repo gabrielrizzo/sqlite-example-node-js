@@ -1,7 +1,7 @@
 const memoryDatabase = require('../database')
 
 async function Music () {
-  await memoryDatabase.run("CREATE TABLE IF NOT EXISTS musics (name TEXT, artist TEXT)")
+  await memoryDatabase.run("CREATE TABLE IF NOT EXISTS musics (id INTEGER PRIMARY KEY, name TEXT, artist TEXT)")
   return {
     createMusic: async function ({ name, artist }) {
        return memoryDatabase.run(`INSERT INTO musics(name, artist) VALUES($name, $artists)`, {
